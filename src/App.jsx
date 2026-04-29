@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { DrawerProvider } from './components/collab-shell';
-import { LiveHeader, LiveDiagnosis, LiveThisWeek, LiveDetails, LiveHistory } from './components/live-sections';
+import { LiveHeader, LiveDiagnosis, LiveThisWeek, LiveDetails, LiveProposal, LiveHistory } from './components/live-sections';
 import { STORE } from './store';
 import { getApiKey, setApiKey } from './claude';
 import { T } from './components/core';
@@ -96,6 +96,7 @@ export default function App() {
         <LiveDiagnosis />
         <LiveThisWeek />
         <LiveDetails />
+        <LiveProposal />
         <LiveHistory />
         <footer style={{
           padding: '32px 40px 48px',

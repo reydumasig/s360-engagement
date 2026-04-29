@@ -12,6 +12,7 @@ import {
   Workstreams, RiskRegister, DecisionLog, Actions, MilestoneCalendar, NotesLinks, PriorWeek,
 } from './sections';
 import { HeaderEditor, ThisWeekEditor, JsonSectionEditor, DiagnosisEditor } from './drawer-editors';
+import { ProposalHeadline, AgentCoverageGrid, ProposalPipeline, GapRegister } from './proposal-section';
 
 function useTime() {
   const [, set] = useState(0);
@@ -338,6 +339,75 @@ function SectionFrame({ title, stamp, onEdit, children }) {
   );
 }
 
+// ---------- PROPOSAL TRACKING ----------------------------------------
+
+export function LiveProposal() {
+  useStore();
+  const pt = STORE.getData().proposalTracking;
+  if (!pt) return null;
+
+  return (
+    <section style={{ padding: '32px 40px 0' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <SectionTitle
+          n="03"
+          title="Proposal vs. Build"
+          sub="Coverage · pipeline · gaps"
+          right={
+            <a
+              href={`https://drive.google.com/file/d/${pt.driveFileId}/view`}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '0.16em',
+                textTransform: 'uppercase', color: T.accent, textDecoration: 'none',
+                padding: '5px 12px', border: `1px solid rgba(91,184,214,0.32)`,
+                background: 'rgba(91,184,214,0.06)', borderRadius: 2,
+              }}
+            >↗ View proposal</a>
+          }
+        />
+
+        {/* Tagline */}
+        <div style={{
+          fontFamily: 'Manrope', fontSize: 14, color: T.textDim, lineHeight: 1.65,
+          fontStyle: 'italic', marginBottom: 20,
+          padding: '14px 20px', background: T.surface,
+          border: `1px solid ${T.border}`, borderLeft: `2px solid ${T.accent}`,
+          borderRadius: 2,
+        }}>
+          "{pt.headline}"
+        </div>
+
+        {/* Headline metrics */}
+        <div style={{ marginBottom: 12 }}>
+          <ProposalHeadline metrics={pt.headlineMetrics} />
+        </div>
+
+        {/* Agent coverage */}
+        <div style={{ marginBottom: 8, padding: '0 4px' }}>
+          <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase' }}>
+            Agent coverage — click to expand
+          </span>
+        </div>
+        <div style={{ marginBottom: 12 }}>
+          <AgentCoverageGrid agents={pt.agents} />
+        </div>
+
+        {/* Pipeline */}
+        <div style={{ marginBottom: 12 }}>
+          <ProposalPipeline pipeline={pt.pipeline} />
+        </div>
+
+        {/* Gap register */}
+        <div style={{ marginBottom: 12 }}>
+          <GapRegister gaps={pt.gaps} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ---------- HISTORY --------------------------------------------------
 
 export function LiveHistory() {
@@ -351,8 +421,8 @@ export function LiveHistory() {
       <section style={{ padding: '32px 40px 64px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <SectionTitle
-            n="03"
-            title="Prior weeks"
+            n="04"
+          title="Prior weeks"
             sub="No archived weeks yet — first 'Start new week' will land here."
           />
         </div>
@@ -364,7 +434,7 @@ export function LiveHistory() {
     <section style={{ padding: '32px 40px 64px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <SectionTitle
-          n="03"
+          n="04"
           title="Prior weeks"
           sub={`${weeks.length} ${weeks.length === 1 ? 'entry' : 'entries'}`}
         />
