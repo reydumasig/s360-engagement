@@ -314,16 +314,16 @@ export function MilestoneCalendar({ milestones }) {
 }
 
 export function NotesLinks({ notes }) {
-  const icons = { loom: '▶', doc: '≡', repo: '</>' };
+  const icons = { loom: '▶', doc: '≡', repo: '</>', slack: '#', folder: '⌂' };
   return (
     <Card>
       <Eyebrow>Notes & links</Eyebrow>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 8 }}>
         {notes.map((n, i) => (
           <a
-            key={i} href={n.href}
-            style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', border: `1px solid ${T.border}`, color: T.text, textDecoration: 'none', background: T.surfaceLo, borderRadius: 2 }}
-            onMouseOver={(e) => { e.currentTarget.style.borderColor = T.accent; }}
+            key={i} href={n.href || undefined} target={n.href ? '_blank' : undefined} rel="noreferrer"
+            style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 14px', border: `1px solid ${T.border}`, color: T.text, textDecoration: 'none', background: T.surfaceLo, borderRadius: 2, cursor: n.href ? 'pointer' : 'default', opacity: n.href ? 1 : 0.6 }}
+            onMouseOver={(e) => { if (n.href) e.currentTarget.style.borderColor = T.accent; }}
             onMouseOut={(e) => { e.currentTarget.style.borderColor = T.border; }}
           >
             <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 11, color: T.accent, width: 22 }}>{icons[n.kind] || '·'}</span>

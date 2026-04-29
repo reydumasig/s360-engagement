@@ -13,6 +13,7 @@ import {
 } from './sections';
 import { HeaderEditor, ThisWeekEditor, JsonSectionEditor, DiagnosisEditor } from './drawer-editors';
 import { ProposalHeadline, AgentCoverageGrid, ProposalPipeline, GapRegister } from './proposal-section';
+import { ProposalTimeline } from './timeline-section';
 
 function useTime() {
   const [, set] = useState(0);
@@ -314,11 +315,6 @@ export function LiveDetails() {
           </SectionFrame>
         </div>
 
-        <div style={{ marginTop: 12 }}>
-          <SectionFrame title="Notes & links" stamp="notes" onEdit={editJson('notes', 'Notes & links')}>
-            <NotesLinks notes={e.notes || []} />
-          </SectionFrame>
-        </div>
       </div>
     </section>
   );
@@ -368,6 +364,16 @@ export function LiveProposal() {
           }
         />
 
+        {/* Timeline */}
+        <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 8, padding: '0 4px' }}>
+            <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase' }}>
+              Delivery timeline — proposed vs. actual
+            </span>
+          </div>
+          <ProposalTimeline tl={STORE.getData().proposalTimeline} />
+        </div>
+
         {/* Tagline */}
         <div style={{
           fontFamily: 'Manrope', fontSize: 14, color: T.textDim, lineHeight: 1.65,
@@ -408,6 +414,33 @@ export function LiveProposal() {
   );
 }
 
+// ---------- NOTES & LINKS (bottom) -----------------------------------
+
+export function LiveNotes() {
+  useStore();
+  const drawer = useDrawer();
+  const e = STORE.getData();
+  const editJson = (path, label) => () => drawer.open({
+    title: label,
+    render: ({ close }) => <JsonSectionEditor path={path} label={label} close={close} />,
+  });
+
+  return (
+    <section style={{ padding: '32px 40px 0' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+        <SectionTitle
+          n="05"
+          title="Notes & Links"
+          sub="Proposal · repos · boards · channels"
+        />
+        <SectionFrame title="Notes & links" stamp="notes" onEdit={editJson('notes', 'Notes & links')}>
+          <NotesLinks notes={e.notes || []} />
+        </SectionFrame>
+      </div>
+    </section>
+  );
+}
+
 // ---------- HISTORY --------------------------------------------------
 
 export function LiveHistory() {
@@ -421,7 +454,7 @@ export function LiveHistory() {
       <section style={{ padding: '32px 40px 64px' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <SectionTitle
-            n="04"
+            n="06"
           title="Prior weeks"
             sub="No archived weeks yet — first 'Start new week' will land here."
           />
@@ -434,7 +467,7 @@ export function LiveHistory() {
     <section style={{ padding: '32px 40px 64px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }}>
         <SectionTitle
-          n="04"
+          n="06"
           title="Prior weeks"
           sub={`${weeks.length} ${weeks.length === 1 ? 'entry' : 'entries'}`}
         />
