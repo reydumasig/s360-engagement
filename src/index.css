@@ -1,0 +1,41 @@
+:root { color-scheme: dark; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #06080C;
+  color: #F5F7FA;
+  font-family: Manrope, sans-serif;
+  min-height: 100vh;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(91,184,214,0.06), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(91,184,214,0.04), transparent 60%),
+    #06080C;
+  background-attachment: fixed;
+}
+
+* { box-sizing: border-box; }
+::selection { background: rgba(91,184,214,0.3); }
+button, a, input, select, textarea { font-family: inherit; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #06080C; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+@media print {
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  header {
+    position: static !important;
+    background: #fff !important;
+    border-bottom: 1px solid #ccc !important;
+  }
+  .no-print { display: none !important; }
+  .print-break { page-break-before: always; }
+}
