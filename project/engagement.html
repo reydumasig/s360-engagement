@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Engagement · Summit360</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; padding: 0; background: #06080C; color: #F5F7FA; font-family: Manrope, sans-serif; min-height: 100vh; }
+  body {
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(91,184,214,0.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(91,184,214,0.04), transparent 60%),
+      #06080C;
+    background-attachment: fixed;
+  }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(91,184,214,0.3); }
+  button, a, input, select, textarea { font-family: inherit; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #06080C; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.10); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="engagement-data.js?v=4"></script>
+<script src="store.js?v=4"></script>
+<script type="text/babel" src="dashboard-core.jsx?v=4"></script>
+<script type="text/babel" src="dashboard-sections.jsx?v=4"></script>
+<script type="text/babel" src="collab-shell.jsx?v=4"></script>
+<script type="text/babel" src="drawer-editors.jsx?v=4"></script>
+<script type="text/babel" src="live-sections.jsx?v=4"></script>
+
+<script type="text/babel">
+function App() {
+  return (
+    <window.DrawerProvider>
+      <main>
+        <window.LiveHeader />
+        <window.LiveDiagnosis />
+        <window.LiveThisWeek />
+        <window.LiveDetails />
+        <window.LiveHistory />
+        <footer style={{ padding: "32px 40px 48px", borderTop: "1px solid rgba(255,255,255,0.08)", marginTop: 24 }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", justifyContent: "space-between", fontFamily: "JetBrains Mono, monospace", fontSize: 11, color: "#6B7689", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+            <span>Summit360 · {window.STORE.getData().client.code}</span>
+            <span>
+              <button onClick={() => { if (confirm("Reset all edits to seed data?")) window.STORE.reset(); }}
+                style={{ background: "transparent", border: "none", color: "#6B7689", cursor: "pointer", fontFamily: "inherit", fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase" }}>Reset to seed</button>
+              &nbsp;·&nbsp;Updated weekly · Friday AM
+            </span>
+          </div>
+        </footer>
+      </main>
+    </window.DrawerProvider>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
