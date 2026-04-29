@@ -593,11 +593,6 @@ export const ENGAGEMENT_SEED = {
       href: "https://drive.google.com",
     },
     {
-      kind: "repo",
-      label: "s360-engagement — Dashboard Repo",
-      href: "https://github.com/reydumasig/s360-engagement",
-    },
-    {
       kind: "loom",
       label: "Live Dashboard",
       href: "https://s360-engagement-vkh2.vercel.app/",
