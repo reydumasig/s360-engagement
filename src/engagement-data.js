@@ -68,6 +68,9 @@ export const ENGAGEMENT_SEED = {
       "Trailblazer Monday.com integration (4 Pathfinders, 4 Summit Partners)",
       "Profile Builder data package (JSON + markdown)",
       "Daily #trailblazer report (9AM KL)",
+      "30/60/90-day Summit Partner check-in emails — automated, live (trailblazer@s360team.com)",
+      "Appraisal reply monitoring — 48h no-reply auto-tags Adot in #pathfinders-appraisal",
+      "Atlas OM engagement dashboard connected to GitHub → Vercel (real-time data pipeline)",
     ],
     next: [
       "First real shortlist run end-to-end (May 2)",
@@ -148,7 +151,7 @@ export const ENGAGEMENT_SEED = {
     progress: {
       milestonesDone: 5,
       milestonesTotal: 8,
-      daysElapsed: 22,
+      daysElapsed: 23,
       daysTotal: 32,
     },
   },
@@ -335,6 +338,30 @@ export const ENGAGEMENT_SEED = {
           owner: "Adot D.",
           status: "done",
         },
+        {
+          name: "30-day Summit Partner check-in email (automated, past-date guard, CC Adot)",
+          date: "2026-04-29",
+          owner: "Rey D.",
+          status: "done",
+        },
+        {
+          name: "60-day Summit Partner check-in email (automated, past-date guard, CC Adot)",
+          date: "2026-04-29",
+          owner: "Rey D.",
+          status: "done",
+        },
+        {
+          name: "90-day Summit Partner check-in email (automated, past-date guard, CC Adot)",
+          date: "2026-04-29",
+          owner: "Rey D.",
+          status: "done",
+        },
+        {
+          name: "Appraisal reply monitor — 48h no-reply tags Adot in #pathfinders-appraisal",
+          date: "2026-04-29",
+          owner: "Rey D.",
+          status: "done",
+        },
       ],
     },
     {
@@ -377,6 +404,12 @@ export const ENGAGEMENT_SEED = {
         {
           name: "KPI dashboard summary (weekly, embedded in Monday report)",
           date: "2026-04-27",
+          owner: "Rey D.",
+          status: "done",
+        },
+        {
+          name: "Live engagement dashboard (GitHub → Vercel, Atlas OS as control plane)",
+          date: "2026-04-29",
           owner: "Rey D.",
           status: "done",
         },
